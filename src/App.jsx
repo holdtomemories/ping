@@ -909,10 +909,33 @@ export default function App() {
                 style={{display:"flex",alignItems:"center",gap:12,padding:"12px 14px",background:T.bg3,border:`1px solid ${T.border2}`,borderRadius:6,cursor:"pointer",fontFamily:"'Space Mono',monospace",color:T.text,fontSize:11,textAlign:"left"}}>
                 <I.Link/><span>copy link to ping</span>
               </button>
+
               <button onClick={()=>capturePostAsStory(shareTarget, getUser(shareTarget.userId), dark)}
-                style={{display:"flex",alignItems:"center",gap:12,padding:"12px 14px",background:"linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)",border:"none",borderRadius:6,cursor:"pointer",fontFamily:"'Space Mono',monospace",color:"#fff",fontSize:11,textAlign:"left"}}>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-                <span>share to instagram story</span>
+                style={{
+                  display:"flex",
+                  alignItems:"center",
+                  gap:12,
+                  padding:"12px 14px",
+                  background:"linear-gradient(135deg,#7cc644, #4FF7A0)",
+                  border:"none",
+                  borderRadius:6,
+                  cursor:"pointer",
+                  fontFamily:"'Space Mono',monospace",
+                  color:"#fff",
+                  fontSize:11,
+                  textAlign:"left"
+                }}>
+                
+                {/* green dot logo */}
+                <span style={{
+                  width:8,
+                  height:8,
+                  background:"#ffffff",
+                  borderRadius:"50%",
+                  display:"inline-block"
+                }}></span>
+
+                <span>share ping card</span>
               </button>
             </div>
           </div>
