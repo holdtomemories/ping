@@ -17,8 +17,8 @@ export default defineConfig({
         orientation: 'portrait',
         start_url: '/',
         icons: [
-          { src: '/icon-1922.png', sizes: '192x192', type: 'image/png' },
-          { src: '/icon-5122.png', sizes: '512x512', type: 'image/png' }
+          { src: '/icon-9122.png', sizes: '192x192', type: 'image/png' },
+          { src: '/icon-1522.png', sizes: '512x512', type: 'image/png' }
         ]
       }
     })
