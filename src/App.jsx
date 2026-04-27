@@ -531,27 +531,27 @@ export default function App() {
       <style>{CSS}</style>
       <div style={{width:310,padding:"0 20px"}}>
         <div style={{marginBottom:44}}>
-          <div style={{fontFamily:"'Instrument Serif',serif",fontSize:48,color:"#e2e2e2",letterSpacing:"-0.02em",lineHeight:1}}>ping.</div>
-          <div style={{color:"#262626",fontSize:9,marginTop:8,letterSpacing:"0.14em",textTransform:"uppercase"}}>real-time · minimal · live</div>
+          <div style={{fontFamily:"'Instrument Serif',serif",fontSize:48,color:"#ffffff",letterSpacing:"-0.02em",lineHeight:1}}>ping.</div>
+          <div style={{color:"#4FF7A0",fontSize:9,marginTop:8,letterSpacing:"0.14em",textTransform:"uppercase"}}>real-time · minimal · live</div>
         </div>
         <div style={{display:"flex",flexDirection:"column",gap:18}}>
           <div>
-            <div style={{color:"#363636",fontSize:9,letterSpacing:"0.14em",marginBottom:10,textTransform:"uppercase"}}>username</div>
+            <div style={{color:"#ffffff",fontSize:9,letterSpacing:"0.14em",marginBottom:10,textTransform:"uppercase"}}>username</div>
             <input className="iLine" style={{fontSize:13}} placeholder={signupMode?"pick a handle":"@handle"} value={loginF.username}
               onChange={e=>setLoginF(f=>({...f,username:e.target.value}))}
               onKeyDown={e=>e.key==="Enter"&&handleLogin()}/>
           </div>
           {signupMode&&(
             <div>
-              <div style={{color:"#363636",fontSize:9,letterSpacing:"0.14em",marginBottom:10,textTransform:"uppercase"}}>bio</div>
+              <div style={{color:"#ffffff",fontSize:9,letterSpacing:"0.14em",marginBottom:10,textTransform:"uppercase"}}>bio</div>
               <input className="iLine" style={{fontSize:12}} placeholder="short intro" value={loginF.bio} onChange={e=>setLoginF(f=>({...f,bio:e.target.value.slice(0,80)}))}/>
             </div>
           )}
-          {!signupMode&&<div style={{color:"#1e1e1e",fontSize:10}}>demo: mara · felix · yuki · dom</div>}
+          {!signupMode&&<div style={{color:"#909090",fontSize:10}}>demo: mara · felix · yuki · dom</div>}
           {loginErr&&<div style={{color:"#F75F4F",fontSize:11}}>{loginErr}</div>}
           <div style={{display:"flex",alignItems:"center",gap:14,marginTop:4}}>
             <button className="btnMain" onClick={handleLogin}>{signupMode?"create":"sign in"}</button>
-            <button style={{background:"none",border:"none",color:"#404040",fontFamily:"'Space Mono',monospace",fontSize:10,cursor:"pointer",textDecoration:"underline",textUnderlineOffset:"3px"}}
+            <button style={{background:"none",border:"none",color:"#4FF7A0",fontFamily:"'Space Mono',monospace",fontSize:10,cursor:"pointer",textDecoration:"underline",textUnderlineOffset:"3px"}}
               onClick={()=>{setSignupMode(s=>!s);setLoginErr("");}}>
               {signupMode?"← sign in":"sign up"}
             </button>
