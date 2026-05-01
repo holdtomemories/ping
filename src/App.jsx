@@ -443,7 +443,7 @@ function PublicLinkModal({post,T,onConfirm,onCancel}) {
         </div>
         <div style={{background:T.bg3,borderRadius:12,padding:"12px 14px",marginBottom:18,fontSize:13,
           color:T.text2,lineHeight:1.65,borderLeft:"3px solid #F7C84F"}}>
-          This will only make <strong style={{color:T.text}}>this specific post</strong> visible to the public. Your profile and other pings will remain private.
+          This will only make <strong style={{color:T.text}}>this specific ping</strong> visible to the public. Your profile and other pings will remain private. Once public, a ping cannot be made private again.
         </div>
         <div style={{background:T.bg3,borderRadius:8,padding:"10px 12px",marginBottom:20,fontSize:12,color:T.text3}}>
           <div style={{fontWeight:600,color:T.text2,marginBottom:4,display:"flex",alignItems:"center",gap:5}}><I.Globe/> preview</div>
@@ -515,7 +515,7 @@ const InlineReply = memo(function InlineReply({postId,author,me,T,onSubmit,onClo
   const wrapRef= useRef(null);
   const [charCount,setCharCount]=useState(0);
   const prefix = `@${author?.username||""} `;
-  const MAX = 240;
+  const MAX = 90;
 
   useEffect(()=>{
     if(!taRef.current) return;
@@ -1131,14 +1131,14 @@ function ProfileView({user,me,myId,posts,replies,getUser,T,dark,onLike,onRepost,
           <Av user={me} size={36}/>
           <div style={{flex:1}}>
             <textarea style={{width:"100%",fontSize:15,lineHeight:1.6,minHeight:38,color:T.text,fontFamily:"system-ui,-apple-system,sans-serif"}}
-              placeholder="What's happening?" value={compose} maxLength={240}
+              placeholder="What's happening?" value={compose} maxLength={90}
               onChange={e=>setCompose(e.target.value)}
               onKeyDown={e=>{if(e.key==="Enter"&&(e.metaKey||e.ctrlKey)){postPing(compose);setCompose("");}}}/>
             {compose.length>0&&(
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:8}}>
-                <CC n={compose.length} max={240} T={T}/>
+                <CC n={compose.length} max={90} T={T}/>
                 <button className="btnPrimary" style={{fontSize:13,padding:"6px 14px"}}
-                  onClick={()=>{postPing(compose);setCompose("");}} disabled={!compose.trim()||compose.length>240}>ping</button>
+                  onClick={()=>{postPing(compose);setCompose("");}} disabled={!compose.trim()||compose.length>90}>ping</button>
               </div>
             )}
           </div>
@@ -1365,7 +1365,7 @@ export default function App() {
   // ── DATA ACTIONS ─────────────────────────────────────────────────────────
   function postPing(content) {
     if(isGuest){setShowAuth(true);return;}
-    if(!content?.trim()||content.length>240)return;
+    if(!content?.trim()||content.length>90)return;
     setPosts(ps=>[{id:uid(),userId:myId,content:content.trim(),createdAt:Date.now(),
       likes:[],reposts:[],bookmarks:[],shares:0,uniqueViewers:[myId],isPublic:false},...ps]);
     setPingText("");setComposeOpen(false);
@@ -1767,18 +1767,18 @@ export default function App() {
           const key=dmKey(myId,dmTarget),convo=msgs[key]||[];
           return (
             <div style={{display:"flex",flexDirection:"column",minHeight:"100%"}}>
-              {/* Thread header */}
-              <div style={{display:"flex",alignItems:"center",gap:10,padding:"10px 16px",
-                borderBottom:`1px solid ${T.border}`,position:"sticky",top:52,zIndex:70,
+              {/* Thread Header */}
+              <div style={{display:"flex",alignItems:"center",gap:10,padding:"5px 5px",
+                borderBottom:`1px solid ${T.border}`,position:"sticky",top:5,zIndex:70,
                 background:T.navBg,backdropFilter:"blur(12px)"}}>
                 <button className="iBtn" onClick={()=>setDmTarget(null)}><I.Back/></button>
-                <button style={{background:"none",border:"none",cursor:"pointer",padding:0}} onClick={()=>openProfile(partner.id)}>
+                <button style={{background:"none",border:"none",cursor:"pointer",padding:5}} onClick={()=>openProfile(partner.id)}>
                   <Av user={partner} size={34}/>
                 </button>
                 <button className="uBtn" style={{fontSize:15}} onClick={()=>openProfile(partner.id)}>@{partner.username}</button>
               </div>
               {/* Messages */}
-              <div style={{flex:1,padding:"16px 14px",display:"flex",flexDirection:"column",gap:10}}>
+              <div style={{flex:1,padding:"20px 14px",display:"flex",flexDirection:"column",gap:10}}>
                 {convo.length===0&&(
                   <div style={{color:T.text3,fontSize:14,textAlign:"center",paddingTop:40,fontStyle:"italic"}}>no messages yet</div>
                 )}
@@ -1893,12 +1893,12 @@ export default function App() {
               <Av user={displayMe} size={40}/>
               <div style={{flex:1}}>
                 <textarea style={{width:"100%",fontSize:16,lineHeight:1.65,minHeight:80,color:T.text,fontFamily:"system-ui,-apple-system,sans-serif"}}
-                  placeholder="What's happening?" value={pingText} maxLength={240}
+                  placeholder="What's happening?" value={pingText} maxLength={90}
                   onChange={e=>setPingText(e.target.value)} autoFocus
                   onKeyDown={e=>{if(e.key==="Enter"&&(e.metaKey||e.ctrlKey))postPing(pingText);}}/>
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:12,borderTop:`1px solid ${T.border}`,paddingTop:12}}>
-                  <CC n={pingText.length} max={240} T={T}/>
-                  <button className="btnPrimary" onClick={()=>postPing(pingText)} disabled={!pingText.trim()||pingText.length>240}>ping it</button>
+                  <CC n={pingText.length} max={90} T={T}/>
+                  <button className="btnPrimary" onClick={()=>postPing(pingText)} disabled={!pingText.trim()||pingText.length>90}>ping it</button>
                 </div>
               </div>
             </div>
@@ -1992,7 +1992,7 @@ export default function App() {
                   <span style={{fontWeight:700,fontSize:20,color:T.text}}>@{qrTarget.username}</span>
                   {qrTarget.isPrivate&&<span style={{color:T.text3,display:"flex"}}><I.Lock/></span>}
                 </div>
-                {qrTarget.bio&&<div style={{color:T.text3,fontSize:13,marginTop:4,maxWidth:240,lineHeight:1.5}}>{qrTarget.bio}</div>}
+                {qrTarget.bio&&<div style={{color:T.text3,fontSize:13,marginTop:4,maxWidth:90,lineHeight:1.5}}>{qrTarget.bio}</div>}
               </div>
               <div style={{background:"#fff",borderRadius:14,padding:12,boxShadow:"0 4px 20px rgba(0,0,0,.15)"}}>
                 <PingQR user={qrTarget} size={200}/>
