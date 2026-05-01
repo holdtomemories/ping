@@ -1619,7 +1619,7 @@ export default function App() {
           {tab==="stream"&&(
             <div style={{display:"flex",alignItems:"center",gap:5,fontSize:10,letterSpacing:".1em",textTransform:"uppercase",fontWeight:600}}>
               <span style={{width:6,height:6,borderRadius:"50%",background:"#4FF7A0",display:"inline-block",animation:"pulseDot 2s infinite"}}/>
-              <span style={{color:"#4FF7A0"}}>LIVE</span>
+              <span style={{color:"#4FF7A0"}}>PINGING</span>
             </div>
           )}
           {tab==="notifications"&&unread>0&&(
