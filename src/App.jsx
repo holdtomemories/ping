@@ -481,8 +481,8 @@ async function capturePostAsStory(post,author,dark) {
   for(const w of words){const t=ln?ln+" "+w:w;if(ctx.measureText(t).width>cw-100){lines.push(ln);ln=w;}else ln=t;}
   if(ln)lines.push(ln);
   lines.forEach((l,i)=>ctx.fillText(l,cx+50,cy+160+i*58));
-  ctx.fillStyle="#4F8EF7";ctx.beginPath();ctx.roundRect(W/2-260,H-180,520,76,38);ctx.fill();
-  ctx.fillStyle="#fff";ctx.font="bold 26px system-ui";ctx.textAlign="center";ctx.textBaseline="middle";
+  ctx.fillStyle="#4FF7A0";ctx.beginPath();ctx.roundRect(W/2-260,H-180,520,76,38);ctx.fill();
+  ctx.fillStyle="#ffffff";ctx.font="bold 26px system-ui";ctx.textAlign="center";ctx.textBaseline="middle";
   ctx.fillText("read on ping.app →",W/2,H-142);
   const url=`https://ping.app/p/${post.id}`;
   c.toBlob(blob=>{
@@ -1102,7 +1102,7 @@ function ProfileView({user,me,myId,posts,replies,getUser,T,dark,onLike,onRepost,
                   padding:"6px 12px",cursor:"pointer",borderRadius:8,transition:"all .15s"}}
                   onMouseEnter={e=>{e.currentTarget.style.borderColor=T.text;e.currentTarget.style.color=T.text;}}
                   onMouseLeave={e=>{e.currentTarget.style.borderColor=T.border2;e.currentTarget.style.color=T.text2;}}
-                  onClick={()=>onMsg(user.id)}>msg</button>
+                  onClick={()=>onMsg(user.id)}>ping now</button>
                 <button className={`fBtn ${isFollowing?"on":""}`} onClick={()=>onFollow(user.id)}>
                   {isFollowing?<><I.Check/> following</>:<>+ follow</>}
                 </button>
@@ -1927,30 +1927,55 @@ export default function App() {
       {/* Public link safety */}
       {publicLinkTarget&&<PublicLinkModal post={publicLinkTarget} T={T} onConfirm={confirmMakePublic} onCancel={()=>setPublicLinkTarget(null)}/>}
 
-      {/* Share */}
+  {/* Share modal */}
       {shareTarget&&(
         <div className="overlay" onClick={e=>{if(e.target===e.currentTarget)setShareTarget(null);}}>
-          <div className="sheet fadeIn" style={{padding:22}}>
+          <div className="sheet slideUp" style={{padding:22}}>
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:18}}>
-              <span style={{fontSize:13,color:T.text3,fontWeight:600,textTransform:"uppercase",letterSpacing:".05em"}}>share ping</span>
+              <span style={{fontSize:10,color:T.text3,letterSpacing:"0.1em",textTransform:"uppercase"}}>share ping</span>
               <button className="iBtn" onClick={()=>setShareTarget(null)}><I.Close/></button>
             </div>
-            <div style={{background:T.bg3,borderRadius:10,padding:"13px 16px",marginBottom:18,fontSize:14,color:T.text2,lineHeight:1.6}}>
+            <div style={{background:T.bg3,borderRadius:8,padding:"12px 14px",marginBottom:18,fontSize:12,color:T.text2,lineHeight:1.65}}>
               "{shareTarget.content}"
             </div>
             <div style={{display:"flex",flexDirection:"column",gap:10}}>
               <button onClick={()=>{copyLink(`https://ping.app/p/${shareTarget.id}`);setShareTarget(null);}}
-                style={{display:"flex",alignItems:"center",gap:12,padding:"13px 16px",background:T.bg3,border:`1px solid ${T.border2}`,borderRadius:10,cursor:"pointer",color:T.text,fontSize:14}}>
-                <I.Link/><span>copy link</span>
+                style={{display:"flex",alignItems:"center",gap:12,padding:"12px 14px",background:T.bg3,border:`1px solid ${T.border2}`,borderRadius:6,cursor:"pointer",fontFamily:"'Space Mono',monospace",color:T.text,fontSize:11,textAlign:"left"}}>
+                <I.Link/><span>copy link to ping</span>
               </button>
-              <button onClick={()=>{capturePostAsStory(shareTarget,getUser(shareTarget.userId),dark);setShareTarget(null);}}
-                style={{display:"flex",alignItems:"center",gap:12,padding:"13px 16px",background:"linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)",border:"none",borderRadius:10,cursor:"pointer",color:"#fff",fontSize:14}}>
-                <I.IG/><span>share to instagram story</span>
+
+              <button onClick={()=>capturePostAsStory(shareTarget, getUser(shareTarget.userId), dark)}
+                style={{
+                  display:"flex",
+                  alignItems:"center",
+                  gap:12,
+                  padding:"12px 14px",
+                  background:"linear-gradient(135deg,#7cc644, #4FF7A0)",
+                  border:"none",
+                  borderRadius:6,
+                  cursor:"pointer",
+                  fontFamily:"'Space Mono',monospace",
+                  color:"#fff",
+                  fontSize:11,
+                  textAlign:"left"
+                }}>
+                
+                {/* green dot logo */}
+                <span style={{
+                  width:8,
+                  height:8,
+                  background:"#ffffff",
+                  borderRadius:"50%",
+                  display:"inline-block"
+                }}></span>
+
+                <span>share ping card</span>
               </button>
             </div>
           </div>
         </div>
       )}
+
 
       {/* QR Identity — with new PingQR */}
       {qrTarget&&(
