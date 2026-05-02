@@ -904,9 +904,9 @@ function SettingsModal({user,T,dark,isGuest,onSave,onClose,onToggleDark,onQR,onS
             borderRadius:12,border:`1px solid rgba(79,142,247,.2)`}}>
             <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8}}>
               <I.Shield/>
-              <span style={{fontSize:13,fontWeight:700,color:T.text}}>the ping promise</span>
+              <span style={{fontSize:13,fontWeight:700,color:T.text}}>The Ping's Promise</span>
             </div>
-            {["No ads. No algorithms.","We don't sell your data.","You own your pings."].map(p=>(
+            {["Say it. Ping it.","No intrusive ads. No hidden algorithms","We don't sell your data.","You own your pings."].map(p=>(
               <div key={p} style={{display:"flex",alignItems:"center",gap:7,marginBottom:5}}>
                 <span style={{color:"#4FF7A0",fontSize:11}}>✓</span>
                 <span style={{fontSize:12,color:T.text2}}>{p}</span>
